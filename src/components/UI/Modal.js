@@ -6,7 +6,9 @@ import ReactDOM from "react-dom";
 // styling purposes
 
 function Backdrop(props) {
-  return <div className={classes.backdrop}></div>;
+    // remember, the onClick prop is a built-in prop that exists
+    // in almost all HTML elements
+  return <div className={classes.backdrop} onClick={props.onClose}></div>;
 }
 
 function ModalOverlay(props) {
@@ -24,7 +26,7 @@ const portalElement = document.getElementById("overlays");
 export default function Modal(props) {
   return (
     <Fragment>
-      {ReactDOM.createPortal(<Backdrop />, portalElement)}
+      {ReactDOM.createPortal(<Backdrop onClose={props.onClose}/>, portalElement)}
       {ReactDOM.createPortal(
         <ModalOverlay>{props.children}</ModalOverlay>,
         portalElement

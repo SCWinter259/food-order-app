@@ -69,6 +69,10 @@ function cartReducer(state, action) {
     };
   }
 
+  if (action.type === "CLEAR") {
+    return defaultCartState;
+  }
+
   return defaultCartState;
 }
 
@@ -95,6 +99,7 @@ export default function CartProvider(props) {
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler,
   };
 
   function addItemToCartHandler(item) {
@@ -109,6 +114,10 @@ export default function CartProvider(props) {
       type: "REMOVE",
       id: id,
     });
+  }
+
+  function clearCartHandler() {
+    dispatchCartAction({ type: "CLEAR" });
   }
 
   return (
